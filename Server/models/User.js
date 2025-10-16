@@ -46,6 +46,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  token : {
+    type: String,
+    default: null,
+  },
+  resetPasswordToken : {
+    type: String,
+    default: null,
+  },
   courseProgress: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CourseProgress",

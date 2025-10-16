@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const user = require("../models/User");
+const User = require("../models/user");
 
 // Auth Middleware
 
@@ -23,7 +23,7 @@ exports.auth = async (req, res, next) => {
     try {
         const decode = jwt.verify(token, process.env.JWT_SECRET);
         console.log("Decoded Token:", decode); // Debugging line
-        req.user = decode;
+        req.User = decode;
         next();
     } catch (err) {
       console.error(err);
@@ -45,7 +45,7 @@ exports.auth = async (req, res, next) => {
 
 exports.isStudent = async (req, res, next) => {
   try{
-    if(req.user.accountType !== "Student") {
+    if(req.User.accountType !== "Student") {
       return res.status(403).json({
         success: false,
         message: "This is a protected route for Students only",
@@ -68,7 +68,7 @@ exports.isStudent = async (req, res, next) => {
 
 exports.isInstructor = async (req, res, next) => {
   try{
-    if(req.user.accountType !== "Instructor") {
+    if(req.User.accountType !== "Instructor") {
       return res.status(403).json({
         success: false,
         message: "This is a protected route for Instructors only",

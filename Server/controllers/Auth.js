@@ -1,6 +1,6 @@
 // Importing necessary modules and models
 // send OTP
-const user = require("../models/User");
+const user = require("../models/user");
 const Otp = require("../models/Otp");
 const otpGenerator = require("otp-generator");
 const profile = require("../models/Profile");
@@ -19,7 +19,7 @@ exports.SendOTP = async (req, res) => {
     // Check if the user already exists
     const existingUser = await user.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({
+      return res.status(400).json({   
         success: false,
         message: "User already exists",
       });
