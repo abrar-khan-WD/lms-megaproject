@@ -1,6 +1,6 @@
 // Importing necessary modules and models
 // send OTP
-const user = require("../models/user");
+const user = require("../models/User");
 const Otp = require("../models/Otp");
 const otpGenerator = require("otp-generator");
 const profile = require("../models/Profile");
