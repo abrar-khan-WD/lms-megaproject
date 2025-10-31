@@ -1,5 +1,5 @@
 //  Require the dependency model
-const user = require("../models/user");
+const user = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const crypto = require("crypto");
 

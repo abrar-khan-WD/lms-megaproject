@@ -181,21 +181,21 @@ exports.logIn = async (req, res) => {
       });
     }
     // Check if user exists
-    const existingUser = await user
+    const user = await user
       .findOne({ email });
-    if (!existingUser) {
+    if (!user) {
       return res.status(400).json({
         success: false,
         message: "User not found, Please sign up...",
       });
     }
     // Match Password
-    if (await bcrypt.compare(password, existingUser.password)) {
+    if (await bcrypt.compare(password, user.password)) {
       // payload
       const payload = {
-        email: existingUser.email,
-        id: existingUser._id,
-        accountType: existingUser.accountType,
+        email: user.email,
+        id: user._id,
+        accountType: user.accountType,
       };
       // generate JWT Token
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -255,7 +255,7 @@ exports.changePassword = async(req, res) => {
             });
         }
         // Match Old password
-        if(await bcrypt.compare(oldPassword, existingUser.password)){
+        if(await bcrypt.compare(oldPassword, user.password)){
             // Match New Password and Confirm Password
             if(newPassword !== confirmPassword){
                 return res.status(400).json({
